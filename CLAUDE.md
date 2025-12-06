@@ -11,6 +11,10 @@ Design: remoteok.com style - no landing page, jobs listing is homepage.
 - Supabase (Auth + PostgreSQL with RLS)
 - Tailwind CSS + Shadcn/ui (install only as needed)
 
+## Current Status
+
+See @TODO.md for what's completed and what needs to be done next.
+
 ## Directory Structure
 
 - `src/app/(auth)/` - Authentication pages (login, signup)
@@ -38,10 +42,13 @@ Design: remoteok.com style - no landing page, jobs listing is homepage.
 
 ## Development Workflow
 
-1. Check @TODO.md for current priorities
-2. Read @CONVENTIONS.md for code standards
-3. Read existing code in relevant directory before writing new code
+Before starting any task:
+
+1. Read @TODO.md - check current priorities and what's completed
+2. Read @CONVENTIONS.md - follow code standards
+3. Read existing code in relevant directory
 4. Follow patterns from existing files (don't create new patterns)
+5. Update @TODO.md when you complete a task
 
 ## Context References (Read When Working On)
 

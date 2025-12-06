@@ -8,8 +8,17 @@
 
 ## Installed Shadcn Components
 
-Check `src/components/ui/` directory for current list.
+**Currently:** None installed yet (install as needed)
+
 Install only as needed: `npx shadcn@latest add <component>`
+
+**Likely components needed for MVP:**
+- `button` - Submit buttons, navigation
+- `input` - Form inputs
+- `form` - Job posting form
+- `card` - Job listings
+- `badge` - Skills tags
+- `select` - Role selection dropdown
 
 ## Common Patterns
 
