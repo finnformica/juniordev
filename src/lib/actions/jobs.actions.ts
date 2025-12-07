@@ -135,3 +135,106 @@ export async function createJobAction(formData: FormData) {
   revalidatePath("/jobs");
   redirect("/jobs");
 }
+
+export async function updateJobStatusAction(jobId: string, isActive: boolean) {
+  // Check user role
+  const authResult = await requireRole("business");
+  if ("error" in authResult) {
+    return authResult;
+  }
+
+  const { user } = authResult;
+  const supabase = await createClient();
+
+  // Verify the job belongs to the current user
+  const { data: job, error: fetchError } = await supabase
+    .from("jobs")
+    .select("business_id")
+    .eq("id", jobId)
+    .single();
+
+  if (fetchError || !job) {
+    return { error: "Job not found" };
+  }
+
+  if (job.business_id !== user.id) {
+    return { error: "Unauthorized - you can only update your own jobs" };
+  }
+
+  // Update the job status
+  const { error } = await supabase
+    .from("jobs")
+    .update({ is_active: isActive })
+    .eq("id", jobId);
+
+  if (error) {
+    return { error: error.message };
+  }
+
+  revalidatePath("/dashboard");
+  revalidatePath("/jobs");
+  return { success: true };
+}
+
+export async function deleteJobAction(jobId: string) {
+  // Check user role
+  const authResult = await requireRole("business");
+  if ("error" in authResult) {
+    return authResult;
+  }
+
+  const { user } = authResult;
+  const supabase = await createClient();
+
+  // Verify the job belongs to the current user
+  const { data: job, error: fetchError } = await supabase
+    .from("jobs")
+    .select("business_id")
+    .eq("id", jobId)
+    .single();
+
+  if (fetchError || !job) {
+    return { error: "Job not found" };
+  }
+
+  if (job.business_id !== user.id) {
+    return { error: "Unauthorized - you can only delete your own jobs" };
+  }
+
+  // Delete the job
+  const { error } = await supabase
+    .from("jobs")
+    .delete()
+    .eq("id", jobId);
+
+  if (error) {
+    return { error: error.message };
+  }
+
+  revalidatePath("/dashboard");
+  revalidatePath("/jobs");
+  return { success: true };
+}
+
+export async function getMyJobsAction() {
+  // Check user role
+  const authResult = await requireRole("business");
+  if ("error" in authResult) {
+    return authResult;
+  }
+
+  const { user } = authResult;
+  const supabase = await createClient();
+
+  const { data: jobs, error } = await supabase
+    .from("jobs")
+    .select("id, title, employment_type, is_active, created_at, views")
+    .eq("business_id", user.id)
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    return { error: error.message };
+  }
+
+  return { jobs };
+}

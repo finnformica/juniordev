@@ -34,6 +34,8 @@
 - [x] Job detail page
 - [x] Job posting form (business)
 - [x] Job actions (create)
+- [x] Business dashboard
+- [x] Job management (update status/delete)
 
 ## Phase 5: Admin
 
