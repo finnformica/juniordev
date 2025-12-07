@@ -26,8 +26,8 @@ INSERT INTO auth.users (
 ('00000000-0000-0000-0000-000000000000', '1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d', 'authenticated', 'authenticated', 'sarah@techflow.dev', '$2a$10$H3M.U6q4YJZzrDg5dOGQ8u7DvJJv8u4qA3TjKE4xKJLrKM8TmKKYu', NOW(), NOW(), NOW(), '{"provider":"email","providers":["email"]}', '{"role":"business","first_name":"Sarah","last_name":"Chen"}', NOW(), NOW(), '', '', '', ''),
 ('00000000-0000-0000-0000-000000000000', '2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e', 'authenticated', 'authenticated', 'mike@greenleaf.co', '$2a$10$H3M.U6q4YJZzrDg5dOGQ8u7DvJJv8u4qA3TjKE4xKJLrKM8TmKKYu', NOW(), NOW(), NOW(), '{"provider":"email","providers":["email"]}', '{"role":"business","first_name":"Mike","last_name":"Rodriguez"}', NOW(), NOW(), '', '', '', ''),
 -- Developer users
-('00000000-0000-0000-0000-000000000000', '3c4d5e6f-7a8b-9c0d-1e2f-3a4b5c6d7e8f', 'authenticated', 'authenticated', 'alex.junior@email.com', '$2a$10$H3M.U6q4YJZzrDg5dOGQ8u7DvJJv8u4qA3TjKE4xKJLrKM8TmKKYu', NOW(), NOW(), NOW(), '{"provider":"email","providers":["email"]}', '{"role":"developer","first_name":"Alex","last_name":"Taylor"}', NOW(), NOW(), '', '', '', ''),
-('00000000-0000-0000-0000-000000000000', '4d5e6f7a-8b9c-0d1e-2f3a-4b5c6d7e8f9a', 'authenticated', 'authenticated', 'jordan.dev@email.com', '$2a$10$H3M.U6q4YJZzrDg5dOGQ8u7DvJJv8u4qA3TjKE4xKJLrKM8TmKKYu', NOW(), NOW(), NOW(), '{"provider":"email","providers":["email"]}', '{"role":"developer","first_name":"Jordan","last_name":"Kim"}', NOW(), NOW(), '', '', '', ''),
+('00000000-0000-0000-0000-000000000000', '3c4d5e6f-7a8b-9c0d-1e2f-3a4b5c6d7e8f', 'authenticated', 'authenticated', 'alex.junior@email.com', '$2a$10$H3M.U6q4YJZzrDg5dOGQ8u7DvJJv8u4qA3TjKE4xKJLrKM8TmKKYu', NOW(), NOW(), NOW(), '{"provider":"email","providers":["email"]}', '{"role":"junior","first_name":"Alex","last_name":"Taylor"}', NOW(), NOW(), '', '', '', ''),
+('00000000-0000-0000-0000-000000000000', '4d5e6f7a-8b9c-0d1e-2f3a-4b5c6d7e8f9a', 'authenticated', 'authenticated', 'jordan.dev@email.com', '$2a$10$H3M.U6q4YJZzrDg5dOGQ8u7DvJJv8u4qA3TjKE4xKJLrKM8TmKKYu', NOW(), NOW(), NOW(), '{"provider":"email","providers":["email"]}', '{"role":"junior","first_name":"Jordan","last_name":"Kim"}', NOW(), NOW(), '', '', '', ''),
 -- Admin user
 ('00000000-0000-0000-0000-000000000000', '5e6f7a8b-9c0d-1e2f-3a4b-5c6d7e8f9a0b', 'authenticated', 'authenticated', 'admin@juniorjobs.com', '$2a$10$H3M.U6q4YJZzrDg5dOGQ8u7DvJJv8u4qA3TjKE4xKJLrKM8TmKKYu', NOW(), NOW(), NOW(), '{"provider":"email","providers":["email"]}', '{"role":"admin","first_name":"Admin","last_name":"User"}', NOW(), NOW(), '', '', '', '');
 
@@ -39,8 +39,8 @@ INSERT INTO public.profiles (id, email, role, first_name, last_name, company_nam
 ('2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e', 'mike@greenleaf.co', 'business', 'Mike', 'Rodriguez', 'GreenLeaf Digital', 'Creative director at a sustainable tech agency. We build digital products that make a positive environmental impact while providing hands-on learning opportunities for junior developers.'),
 
 -- Junior developer profiles
-('3c4d5e6f-7a8b-9c0d-1e2f-3a4b5c6d7e8f', 'alex.junior@email.com', 'developer', 'Alex', 'Taylor', NULL, 'Recent bootcamp graduate passionate about frontend development. Eager to contribute to meaningful projects while learning industry best practices.'),
-('4d5e6f7a-8b9c-0d1e-2f3a-4b5c6d7e8f9a', 'jordan.dev@email.com', 'developer', 'Jordan', 'Kim', NULL, 'Computer science student with a focus on full-stack development. Looking for real-world experience to complement academic learning.'),
+('3c4d5e6f-7a8b-9c0d-1e2f-3a4b5c6d7e8f', 'alex.junior@email.com', 'junior', 'Alex', 'Taylor', NULL, 'Recent bootcamp graduate passionate about frontend development. Eager to contribute to meaningful projects while learning industry best practices.'),
+('4d5e6f7a-8b9c-0d1e-2f3a-4b5c6d7e8f9a', 'jordan.dev@email.com', 'junior', 'Jordan', 'Kim', NULL, 'Computer science student with a focus on full-stack development. Looking for real-world experience to complement academic learning.'),
 
 -- Admin profile
 ('5e6f7a8b-9c0d-1e2f-3a4b-5c6d7e8f9a0b', 'admin@juniorjobs.com', 'admin', 'Admin', 'User', NULL, 'Platform administrator')

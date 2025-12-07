@@ -22,10 +22,10 @@
 
 ## Phase 3: Authentication
 
-- [ ] Login page
-- [ ] Signup page (with role selection)
-- [ ] Sign out functionality
-- [ ] Auth actions
+- [x] Login page
+- [x] Signup page (with role selection)
+- [x] Sign out functionality
+- [x] Auth actions
 
 ## Phase 4: Jobs
 
