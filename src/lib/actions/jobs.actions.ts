@@ -132,8 +132,8 @@ export async function createJobAction(formData: FormData) {
     return { error: error.message };
   }
 
-  revalidatePath("/jobs");
-  redirect("/jobs");
+  revalidatePath("/");
+  redirect("/");
 }
 
 export async function updateJobStatusAction(jobId: string, isActive: boolean) {
@@ -172,7 +172,7 @@ export async function updateJobStatusAction(jobId: string, isActive: boolean) {
   }
 
   revalidatePath("/dashboard");
-  revalidatePath("/jobs");
+  revalidatePath("/");
   return { success: true };
 }
 
@@ -212,7 +212,7 @@ export async function deleteJobAction(jobId: string) {
   }
 
   revalidatePath("/dashboard");
-  revalidatePath("/jobs");
+  revalidatePath("/");
   return { success: true };
 }
 

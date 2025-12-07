@@ -24,7 +24,7 @@ export default async function DashboardPage() {
     .single();
 
   if (!profile || profile.role !== "business") {
-    redirect("/jobs");
+    redirect("/");
   }
 
   // Get user's jobs

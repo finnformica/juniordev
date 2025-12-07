@@ -122,7 +122,7 @@ export default function MyJobsTable({ jobs }: MyJobsTableProps) {
               <TableRow key={job.id}>
                 <TableCell className="font-medium">
                   <Link
-                    href={`/jobs/${job.id}`}
+                    href={`/${job.id}`}
                     className="text-blue-600 hover:text-blue-800"
                   >
                     {job.title}

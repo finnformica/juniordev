@@ -45,7 +45,7 @@ export function JobCard({ job }: JobCardProps) {
   };
 
   return (
-    <Link href={`/jobs/${job.id}`} className="block">
+    <Link href={`/${job.id}`} className="block">
       <div className="border-b border-gray-100 hover:bg-gray-50/50 transition-colors p-4">
         <div className="flex items-start gap-4">
           <Avatar

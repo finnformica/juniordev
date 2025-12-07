@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { JobsList } from "@/components/jobs/jobs-list";
 
-export default async function JobsPage() {
+export default async function HomePage() {
   const supabase = await createClient();
 
   const { data: jobs, error } = await supabase
@@ -26,7 +26,6 @@ export default async function JobsPage() {
   }
 
   const totalJobs = jobs?.length || 0;
-  const activeJobs = jobs?.filter(job => job.is_active).length || 0;
 
   return (
     <div className="min-h-screen bg-gray-50">

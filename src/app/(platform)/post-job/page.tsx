@@ -22,7 +22,7 @@ export default async function PostJobPage() {
     .single();
 
   if (!profile || profile.role !== "business") {
-    redirect("/jobs");
+    redirect("/");
   }
 
   return <JobForm user={user} profile={profile} />;

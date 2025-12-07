@@ -47,7 +47,7 @@ export async function loginAction(formData: FormData) {
   }
 
   revalidatePath("/");
-  redirect("/jobs");
+  redirect("/");
 }
 
 export async function signupAction(formData: FormData) {
@@ -95,7 +95,7 @@ export async function signupAction(formData: FormData) {
   }
 
   revalidatePath("/");
-  redirect("/jobs");
+  redirect("/");
 }
 
 export async function signOutAction() {

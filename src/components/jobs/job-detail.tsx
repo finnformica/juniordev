@@ -95,7 +95,7 @@ export function JobDetail({ job }: JobDetailProps) {
         {/* Header Bar */}
         <div className="px-6 py-4 z-10">
           <div className="flex items-center justify-between">
-            <Link href="/jobs">
+            <Link href="/">
               <Button
                 variant="ghost"
                 className="gap-2  hover:text-gray-900 hover:bg-gray-100 px-3 py-2"

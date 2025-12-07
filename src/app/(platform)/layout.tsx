@@ -1,6 +1,6 @@
+import ProfileDropdown from "@/components/ProfileDropdown";
 import { createClient } from "@/lib/supabase/server";
 import Link from "next/link";
-import ProfileDropdown from "@/components/ProfileDropdown";
 
 export default async function PlatformLayout({
   children,
@@ -29,15 +29,14 @@ export default async function PlatformLayout({
       <header className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <Link href="/jobs" className="text-xl font-semibold hover:text-gray-600">
-              Junior Jobs Board
+            <Link
+              href="/"
+              className="text-xl font-semibold hover:text-gray-600"
+            >
+              junior.dev
             </Link>
 
             <nav className="flex items-center gap-4">
-              <Link href="/jobs" className="hover:text-gray-600">
-                Jobs
-              </Link>
-
               {user ? (
                 <ProfileDropdown user={user} profile={userProfile} />
               ) : (

@@ -10,12 +10,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { signOutAction } from "@/lib/actions/auth.actions";
+import { User } from "@supabase/supabase-js";
 import Link from "next/link";
 
 interface ProfileDropdownProps {
-  user: {
-    email: string;
-  };
+  user: User;
   profile: {
     role: string;
     company_name?: string | null;
@@ -25,9 +24,14 @@ interface ProfileDropdownProps {
 
 function getDisplayName(
   profile: ProfileDropdownProps["profile"],
-  email: string
-): string {
-  return profile?.company_name || profile?.first_name || email.split("@")[0];
+  email: string | undefined
+) {
+  return (
+    profile?.company_name ??
+    profile?.first_name ??
+    email?.split("@")[0] ??
+    "User"
+  );
 }
 
 export default function ProfileDropdown({
