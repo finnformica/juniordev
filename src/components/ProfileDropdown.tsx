@@ -1,8 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
+import { Avatar } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { signOutAction } from "@/lib/actions/auth.actions";
+import Link from "next/link";
 
 interface ProfileDropdownProps {
   user: {
@@ -24,40 +23,28 @@ interface ProfileDropdownProps {
   } | null;
 }
 
-function getInitials(profile: ProfileDropdownProps["profile"], email: string): string {
-  if (profile?.company_name) {
-    return profile.company_name
-      .split(" ")
-      .slice(0, 2)
-      .map((word) => word.charAt(0).toUpperCase())
-      .join("");
-  }
-
-  if (profile?.first_name) {
-    return profile.first_name.charAt(0).toUpperCase();
-  }
-
-  return email.charAt(0).toUpperCase();
-}
-
-function getDisplayName(profile: ProfileDropdownProps["profile"], email: string): string {
+function getDisplayName(
+  profile: ProfileDropdownProps["profile"],
+  email: string
+): string {
   return profile?.company_name || profile?.first_name || email.split("@")[0];
 }
 
-export default function ProfileDropdown({ user, profile }: ProfileDropdownProps) {
+export default function ProfileDropdown({
+  user,
+  profile,
+}: ProfileDropdownProps) {
   const displayName = getDisplayName(profile, user.email);
-  const initials = getInitials(profile, user.email);
+
+  // Wrapper action to avoid TypeScript error with return value
+  const handleSignOut = async () => {
+    await signOutAction();
+  };
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-          <Avatar className="h-8 w-8">
-            <AvatarFallback className="text-sm font-medium">
-              {initials}
-            </AvatarFallback>
-          </Avatar>
-        </Button>
+        <Avatar alt={displayName} size={64} className="scale-[0.4]" />
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="w-56" align="end" forceMount>
@@ -89,11 +76,12 @@ export default function ProfileDropdown({ user, profile }: ProfileDropdownProps)
         )}
 
         <DropdownMenuItem asChild>
-          <form action={signOutAction} className="w-full">
-            <button type="submit" className="w-full text-left cursor-pointer">
-              Sign Out
-            </button>
-          </form>
+          <button
+            onClick={handleSignOut}
+            className="w-full text-left cursor-pointer"
+          >
+            Sign Out
+          </button>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

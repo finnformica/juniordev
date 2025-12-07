@@ -14,10 +14,10 @@ export default async function PostJobPage() {
     redirect("/login");
   }
 
-  // Check user role
+  // Check user role and get profile info
   const { data: profile } = await supabase
     .from("profiles")
-    .select("role")
+    .select("role, company_name, first_name")
     .eq("id", user.id)
     .single();
 
@@ -25,5 +25,5 @@ export default async function PostJobPage() {
     redirect("/jobs");
   }
 
-  return <JobForm />;
+  return <JobForm user={user} profile={profile} />;
 }

@@ -1,11 +1,23 @@
 "use client";
 
-import { useFormStatus } from "react-dom";
+import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { createJobAction } from "@/lib/actions/jobs.actions";
+import { useFormStatus } from "react-dom";
+
+interface JobFormProps {
+  user: {
+    email: string;
+  };
+  profile: {
+    role: string;
+    company_name?: string | null;
+    first_name?: string | null;
+  };
+}
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -16,10 +28,25 @@ function SubmitButton() {
   );
 }
 
-export default function JobForm() {
+function getDisplayName(
+  profile: JobFormProps["profile"],
+  email: string
+): string {
+  return profile?.company_name || profile?.first_name || email.split("@")[0];
+}
+
+export default function JobForm({ user, profile }: JobFormProps) {
+  const displayName = getDisplayName(profile, user.email);
+
   return (
     <div className="max-w-2xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-8">Post a Job</h1>
+      <div className="flex items-center gap-4 mb-8">
+        <Avatar alt={displayName} size={64} className="h-16 w-16" />
+        <div>
+          <h1 className="text-3xl font-bold">Post a Job</h1>
+          <p className="text-gray-600 mt-1">Posting as {displayName}</p>
+        </div>
+      </div>
 
       <form action={createJobAction} className="space-y-6">
         {/* Job Title */}
@@ -115,7 +142,9 @@ export default function JobForm() {
 
         {/* Compensation Amount (Optional) */}
         <div className="space-y-2">
-          <Label htmlFor="compensationAmount">Compensation Amount (Optional)</Label>
+          <Label htmlFor="compensationAmount">
+            Compensation Amount (Optional)
+          </Label>
           <Input
             id="compensationAmount"
             name="compensationAmount"
@@ -140,7 +169,9 @@ export default function JobForm() {
 
         {/* Application Deadline */}
         <div className="space-y-2">
-          <Label htmlFor="applicationDeadline">Application Deadline (Optional)</Label>
+          <Label htmlFor="applicationDeadline">
+            Application Deadline (Optional)
+          </Label>
           <Input
             id="applicationDeadline"
             name="applicationDeadline"
@@ -159,7 +190,8 @@ export default function JobForm() {
             required
           />
           <p className="text-sm text-gray-600">
-            Include what the junior developer will learn, their responsibilities, and any requirements.
+            Include what the junior developer will learn, their
+            responsibilities, and any requirements.
           </p>
         </div>
 

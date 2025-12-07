@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import type { Tables } from "@/lib/types/database";
@@ -35,15 +35,6 @@ export function JobDetail({ job }: JobDetailProps) {
     if (diffInHours < 24) return `${diffInHours}h ago`;
     const diffInDays = Math.floor(diffInHours / 24);
     return `${diffInDays}d ago`;
-  };
-
-  const getCompanyInitials = (name: string) => {
-    return name
-      .split(" ")
-      .map((word) => word[0])
-      .join("")
-      .toUpperCase()
-      .slice(0, 2);
   };
 
   const formatSalary = () => {
@@ -131,12 +122,11 @@ export function JobDetail({ job }: JobDetailProps) {
             <div className="p-8">
               {/* Header */}
               <div className="flex items-start gap-6 mb-8">
-                <Avatar className="w-16 h-16 shrink-0 ring-1 ring-gray-200">
-                  <AvatarImage src="" alt={job.company_name} />
-                  <AvatarFallback className="bg-linear-to-br from-blue-500 to-purple-600 text-white font-semibold text-lg">
-                    {getCompanyInitials(job.company_name)}
-                  </AvatarFallback>
-                </Avatar>
+                <Avatar
+                  alt={job.company_name}
+                  size={64}
+                  className="w-16 h-16 shrink-0 ring-1 ring-gray-200"
+                />
 
                 <div className="flex-1 min-w-0">
                   <div className="mb-4">
