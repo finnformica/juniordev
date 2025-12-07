@@ -32,8 +32,8 @@
 - [x] Jobs listing page (root)
 - [x] Jobs filtering and search
 - [x] Job detail page
-- [ ] Job posting form (business)
-- [ ] Job actions (create/update/delete)
+- [x] Job posting form (business)
+- [x] Job actions (create)
 
 ## Phase 5: Admin
 
