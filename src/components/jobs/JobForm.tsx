@@ -38,6 +38,10 @@ function getDisplayName(
 export default function JobForm({ user, profile }: JobFormProps) {
   const displayName = getDisplayName(profile, user.email);
 
+  const handleCreateJob = async (formData: FormData) => {
+    await createJobAction(formData);
+  };
+
   return (
     <div className="max-w-2xl mx-auto p-6">
       <div className="flex items-center gap-4 mb-8">
@@ -48,7 +52,7 @@ export default function JobForm({ user, profile }: JobFormProps) {
         </div>
       </div>
 
-      <form action={createJobAction} className="space-y-6">
+      <form action={handleCreateJob} className="space-y-6">
         {/* Job Title */}
         <div className="space-y-2">
           <Label htmlFor="title">Job Title</Label>

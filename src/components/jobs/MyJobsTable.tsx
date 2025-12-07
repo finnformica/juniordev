@@ -44,7 +44,7 @@ export default function MyJobsTable({ jobs }: MyJobsTableProps) {
     setPendingStatus(jobId);
     try {
       const result = await updateJobStatusAction(jobId, newStatus);
-      if (result.error) {
+      if ("error" in result) {
         console.error("Error updating job status:", result.error);
       }
     } finally {
@@ -63,7 +63,7 @@ export default function MyJobsTable({ jobs }: MyJobsTableProps) {
     setPendingDelete(true);
     try {
       const result = await deleteJobAction(jobToDelete.id);
-      if (result.error) {
+      if ("error" in result) {
         console.error("Error deleting job:", result.error);
       } else {
         setDeleteDialogOpen(false);

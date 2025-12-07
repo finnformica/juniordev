@@ -39,10 +39,10 @@
 
 ## Phase 5: Admin
 
-- [ ] Admin dashboard
-- [ ] View all jobs
-- [ ] View all users
-- [ ] Delete jobs/users
+- [x] Admin dashboard
+- [x] View all jobs
+- [x] View all users
+- [x] Delete jobs/users
 
 ## Phase 6: Polish
 

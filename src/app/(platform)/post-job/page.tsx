@@ -25,5 +25,5 @@ export default async function PostJobPage() {
     redirect("/");
   }
 
-  return <JobForm user={user} profile={profile} />;
+  return <JobForm user={{ email: user.email || "" }} profile={profile} />;
 }
