@@ -1,8 +1,46 @@
-export default function JobsPage() {
+import { createClient } from "@/lib/supabase/server";
+import { JobsList } from "@/components/jobs/jobs-list";
+
+export default async function JobsPage() {
+  const supabase = await createClient();
+
+  const { data: jobs, error } = await supabase
+    .from("jobs")
+    .select("*")
+    .eq("is_active", true)
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("Error fetching jobs:", error);
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <div className="max-w-4xl mx-auto px-4 py-8">
+          <div className="text-center">
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">Junior Jobs Board</h1>
+            <p className="text-gray-600 mb-8">Experience opportunities for junior developers</p>
+            <p className="text-red-600">Unable to load jobs at the moment.</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const totalJobs = jobs?.length || 0;
+  const activeJobs = jobs?.filter(job => job.is_active).length || 0;
+
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-6">Job Listings</h1>
-      <p className="text-gray-600">Jobs will be listed here</p>
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-4xl mx-auto px-4 py-8">
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Junior Jobs Board</h1>
+          <p className="text-gray-600 mb-4">Experience opportunities for junior developers</p>
+          <p className="text-sm text-gray-500">
+            {totalJobs} {totalJobs === 1 ? 'opportunity' : 'opportunities'} available
+          </p>
+        </div>
+
+        <JobsList jobs={jobs || []} />
+      </div>
     </div>
   );
 }

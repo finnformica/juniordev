@@ -29,9 +29,9 @@
 
 ## Phase 4: Jobs
 
-- [ ] Jobs listing page (root)
+- [x] Jobs listing page (root)
+- [x] Jobs filtering and search
 - [ ] Job detail page
-- [ ] Jobs filtering
 - [ ] Job posting form (business)
 - [ ] Job actions (create/update/delete)
 
