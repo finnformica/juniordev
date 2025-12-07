@@ -1,4 +1,4 @@
-# Junior Jobs Board
+# junior.dev
 
 Minimal job board connecting junior developers with small businesses offering experience opportunities.
 

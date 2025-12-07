@@ -1,4 +1,4 @@
-# Project Requirements - Junior Jobs Board
+# Project Requirements - junior.dev
 
 ## Project Vision
 

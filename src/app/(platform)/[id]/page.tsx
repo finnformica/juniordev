@@ -1,6 +1,6 @@
-import { notFound } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
 import { JobDetail } from "@/components/jobs/job-detail";
+import { createClient } from "@/lib/supabase/server";
+import { notFound } from "next/navigation";
 
 interface JobDetailPageProps {
   params: Promise<{ id: string }>;
@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: JobDetailPageProps) {
   }
 
   return {
-    title: `${job.title} at ${job.company_name} | Junior Jobs Board`,
+    title: `${job.title} at ${job.company_name} | junior.dev`,
     description: job.description.slice(0, 160),
   };
 }

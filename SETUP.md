@@ -1,28 +1,33 @@
-# Junior Jobs Board - Setup Instructions
+# junior.dev - Setup Instructions
 
 ## ✅ Completed Setup
 
 The following has been completed:
 
 1. **Dependencies installed:**
+
    - @supabase/supabase-js & @supabase/ssr for database
    - zod for validation
    - shadcn/ui initialized with Tailwind v4
 
 2. **Supabase configuration:**
+
    - Server client: `src/lib/supabase/server.ts`
    - Client component client: `src/lib/supabase/client.ts`
 
 3. **Database migrations created:**
+
    - `supabase/migrations/20240101000000_create_profiles.sql`
    - `supabase/migrations/20240101000001_create_jobs.sql`
    - Includes comprehensive RLS policies
 
 4. **Middleware configured:**
+
    - Auth protection for protected routes
    - Redirects authenticated users away from auth pages
 
 5. **Folder structure created:**
+
    - `src/app/(auth)/` - Login and signup pages
    - `src/app/(platform)/` - Jobs listing (homepage)
    - `src/lib/actions/` - Server Actions directory
@@ -49,12 +54,14 @@ npx supabase link --project-ref YOUR_PROJECT_REF
 ### 3. Run Migrations
 
 Either:
+
 - Push migrations via Supabase CLI: `npx supabase db push`
 - Or run them manually in Supabase SQL editor
 
 ### 4. Generate TypeScript Types
 
 After migrations are applied:
+
 ```bash
 npx supabase gen types typescript --local > src/lib/types/database.ts
 ```

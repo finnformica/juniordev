@@ -1,4 +1,4 @@
-# Junior Jobs Board
+# junior.dev
 
 ## Project
 
