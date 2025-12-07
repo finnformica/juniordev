@@ -31,7 +31,7 @@
 
 - [x] Jobs listing page (root)
 - [x] Jobs filtering and search
-- [ ] Job detail page
+- [x] Job detail page
 - [ ] Job posting form (business)
 - [ ] Job actions (create/update/delete)
 
