@@ -77,13 +77,13 @@ export function AdminUsersTable({ users }: AdminUsersTableProps) {
       case "junior":
         return "bg-green-100 text-green-800";
       default:
-        return "bg-gray-100 text-gray-800";
+        return "bg-muted text-muted-foreground";
     }
   };
 
   if (users.length === 0) {
     return (
-      <div className="text-center py-8 text-gray-500">
+      <div className="text-center py-8 text-muted-foreground">
         No users found.
       </div>
     );
@@ -166,7 +166,7 @@ export function AdminUsersTable({ users }: AdminUsersTableProps) {
         </DialogContent>
       </Dialog>
 
-      <div className="text-sm text-gray-500">
+      <div className="text-sm text-muted-foreground">
         Showing {users.length} user{users.length !== 1 ? "s" : ""}
       </div>
     </div>

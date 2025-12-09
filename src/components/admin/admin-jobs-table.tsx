@@ -76,7 +76,7 @@ export function AdminJobsTable({ jobs }: AdminJobsTableProps) {
 
   if (jobs.length === 0) {
     return (
-      <div className="text-center py-8 text-gray-500">
+      <div className="text-center py-8 text-muted-foreground">
         No jobs found.
       </div>
     );
@@ -105,7 +105,7 @@ export function AdminJobsTable({ jobs }: AdminJobsTableProps) {
                 <TableCell>
                   <div>
                     <div>{job.business?.company_name || "Unknown"}</div>
-                    <div className="text-sm text-gray-500">{job.business?.email}</div>
+                    <div className="text-sm text-muted-foreground">{job.business?.email}</div>
                   </div>
                 </TableCell>
                 <TableCell className="capitalize">{job.employment_type.replace("-", " ")}</TableCell>
@@ -114,7 +114,7 @@ export function AdminJobsTable({ jobs }: AdminJobsTableProps) {
                     className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
                       job.is_active
                         ? "bg-green-100 text-green-800"
-                        : "bg-gray-100 text-gray-800"
+                        : "bg-muted text-muted-foreground"
                     }`}
                   >
                     {job.is_active ? "Active" : "Closed"}
@@ -165,7 +165,7 @@ export function AdminJobsTable({ jobs }: AdminJobsTableProps) {
         </DialogContent>
       </Dialog>
 
-      <div className="text-sm text-gray-500">
+      <div className="text-sm text-muted-foreground">
         Showing {jobs.length} job{jobs.length !== 1 ? "s" : ""}
       </div>
     </div>

@@ -135,7 +135,7 @@ export default function MyJobsTable({ jobs }: MyJobsTableProps) {
                     className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
                       job.is_active
                         ? "bg-green-100 text-green-800"
-                        : "bg-gray-100 text-gray-800"
+                        : "bg-muted text-muted-foreground"
                     }`}
                   >
                     {job.is_active ? "Active" : "Closed"}

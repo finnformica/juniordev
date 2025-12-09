@@ -1,5 +1,10 @@
 "use client";
 
+import type { User } from "@supabase/supabase-js";
+import { Monitor, Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
+import Link from "next/link";
+
 import { Avatar } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -10,8 +15,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { signOutAction } from "@/lib/actions/auth.actions";
-import { User } from "@supabase/supabase-js";
-import Link from "next/link";
 
 interface ProfileDropdownProps {
   user: User;
@@ -39,6 +42,7 @@ export default function ProfileDropdown({
   profile,
 }: ProfileDropdownProps) {
   const displayName = getDisplayName(profile, user.email);
+  const { setTheme, theme } = useTheme();
 
   // Wrapper action to avoid TypeScript error with return value
   const handleSignOut = async () => {
@@ -78,6 +82,32 @@ export default function ProfileDropdown({
             <DropdownMenuSeparator />
           </>
         )}
+
+        <DropdownMenuLabel className="text-xs font-semibold text-muted-foreground">
+          Theme
+        </DropdownMenuLabel>
+        <DropdownMenuItem onClick={() => setTheme("light")}>
+          <Sun className="mr-2 h-4 w-4" />
+          <span>Light</span>
+          {theme === "light" && (
+            <span className="ml-auto text-xs text-muted-foreground">✓</span>
+          )}
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("dark")}>
+          <Moon className="mr-2 h-4 w-4" />
+          <span>Dark</span>
+          {theme === "dark" && (
+            <span className="ml-auto text-xs text-muted-foreground">✓</span>
+          )}
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("system")}>
+          <Monitor className="mr-2 h-4 w-4" />
+          <span>System</span>
+          {theme === "system" && (
+            <span className="ml-auto text-xs text-muted-foreground">✓</span>
+          )}
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
 
         <DropdownMenuItem asChild>
           <button

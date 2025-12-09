@@ -99,7 +99,7 @@ export function JobsList({ jobs }: JobsListProps) {
           <p className="text-muted-foreground">No jobs match your current filters</p>
         </div>
       ) : (
-        <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <div className="bg-card rounded-lg border border-border overflow-hidden">
           {filteredJobs.map((job, index) => (
             <div key={job.id}>
               <JobCard job={job} />
@@ -108,7 +108,7 @@ export function JobsList({ jobs }: JobsListProps) {
         </div>
       )}
 
-      <div className="mt-6 text-center text-sm text-gray-500">
+      <div className="mt-6 text-center text-sm text-muted-foreground">
         Showing {filteredJobs.length} of {jobs.length} jobs
       </div>
     </div>

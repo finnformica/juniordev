@@ -1,5 +1,4 @@
 import ProfileDropdown from "@/components/ProfileDropdown";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { createClient } from "@/lib/supabase/server";
 import Link from "next/link";
 
@@ -27,7 +26,7 @@ export default async function PlatformLayout({
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="bg-card border-b border-border">
+      <header className="bg-muted/30 border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link
@@ -38,11 +37,13 @@ export default async function PlatformLayout({
             </Link>
 
             <nav className="flex items-center gap-4">
-              <ThemeToggle />
               {user ? (
                 <ProfileDropdown user={user} profile={userProfile} />
               ) : (
-                <Link href="/login" className="text-foreground hover:text-muted-foreground transition-colors">
+                <Link
+                  href="/login"
+                  className="text-foreground hover:text-muted-foreground transition-colors"
+                >
                   Sign In
                 </Link>
               )}
