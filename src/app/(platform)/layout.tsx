@@ -1,4 +1,5 @@
 import ProfileDropdown from "@/components/ProfileDropdown";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { createClient } from "@/lib/supabase/server";
 import Link from "next/link";
 
@@ -25,22 +26,23 @@ export default async function PlatformLayout({
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b">
+    <div className="min-h-screen bg-background">
+      <header className="bg-card border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link
               href="/"
-              className="text-xl font-semibold hover:text-gray-600"
+              className="text-xl font-semibold text-foreground hover:text-muted-foreground transition-colors"
             >
               junior.dev
             </Link>
 
             <nav className="flex items-center gap-4">
+              <ThemeToggle />
               {user ? (
                 <ProfileDropdown user={user} profile={userProfile} />
               ) : (
-                <Link href="/login" className="hover:text-gray-600">
+                <Link href="/login" className="text-foreground hover:text-muted-foreground transition-colors">
                   Sign In
                 </Link>
               )}

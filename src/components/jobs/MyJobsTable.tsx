@@ -105,8 +105,9 @@ export default function MyJobsTable({ jobs }: MyJobsTableProps) {
 
   return (
     <>
-      <div className="border rounded-lg">
-        <Table>
+      <div className="border rounded-lg overflow-hidden">
+        <div className="overflow-x-auto">
+          <Table>
           <TableHeader>
             <TableRow>
               <TableHead>Job Title</TableHead>
@@ -166,7 +167,8 @@ export default function MyJobsTable({ jobs }: MyJobsTableProps) {
               </TableRow>
             ))}
           </TableBody>
-        </Table>
+          </Table>
+        </div>
       </div>
 
       <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>

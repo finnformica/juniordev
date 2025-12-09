@@ -84,8 +84,9 @@ export function AdminJobsTable({ jobs }: AdminJobsTableProps) {
 
   return (
     <div className="space-y-4">
-      <div className="rounded-md border">
-        <Table>
+      <div className="rounded-md border overflow-hidden">
+        <div className="overflow-x-auto">
+          <Table>
           <TableHeader>
             <TableRow>
               <TableHead>Title</TableHead>
@@ -134,7 +135,8 @@ export function AdminJobsTable({ jobs }: AdminJobsTableProps) {
               </TableRow>
             ))}
           </TableBody>
-        </Table>
+          </Table>
+        </div>
       </div>
 
       <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>

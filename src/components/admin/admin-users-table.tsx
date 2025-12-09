@@ -91,8 +91,9 @@ export function AdminUsersTable({ users }: AdminUsersTableProps) {
 
   return (
     <div className="space-y-4">
-      <div className="rounded-md border">
-        <Table>
+      <div className="rounded-md border overflow-hidden">
+        <div className="overflow-x-auto">
+          <Table>
           <TableHeader>
             <TableRow>
               <TableHead>Email</TableHead>
@@ -134,7 +135,8 @@ export function AdminUsersTable({ users }: AdminUsersTableProps) {
               </TableRow>
             ))}
           </TableBody>
-        </Table>
+          </Table>
+        </div>
       </div>
 
       <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>

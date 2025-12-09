@@ -46,7 +46,7 @@ export function JobCard({ job }: JobCardProps) {
 
   return (
     <Link href={`/${job.id}`} className="block">
-      <div className="border-b border-gray-100 hover:bg-gray-50/50 transition-colors p-4">
+      <div className="border-b border-border hover:bg-muted/50 transition-colors p-4">
         <div className="flex items-start gap-4">
           <Avatar
             alt={job.company_name}
@@ -57,22 +57,22 @@ export function JobCard({ job }: JobCardProps) {
           <div className="flex-1 min-w-0">
             <div className="flex items-start justify-between mb-2">
               <div className="flex-1 min-w-0">
-                <h3 className="font-semibold text-gray-900 leading-tight mb-1">
+                <h3 className="font-semibold text-foreground leading-tight mb-1">
                   {job.title}
                 </h3>
-                <p className="text-sm text-gray-600 mb-2">{job.company_name}</p>
+                <p className="text-sm text-muted-foreground mb-2">{job.company_name}</p>
               </div>
               <div className="flex flex-col items-end gap-1 ml-4">
                 <Badge variant="secondary" className="text-xs">
                   {getRoleCategory()}
                 </Badge>
-                <span className="text-xs text-gray-500">
+                <span className="text-xs text-muted-foreground">
                   {formatTimeAgo(job.created_at)}
                 </span>
               </div>
             </div>
 
-            <div className="flex items-center gap-4 text-sm text-gray-600 mb-3">
+            <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
               <span className="flex items-center gap-1">📍 {job.location}</span>
               {job.location_type === "remote" && (
                 <Badge variant="outline" className="text-xs">

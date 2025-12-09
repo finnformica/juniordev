@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { AlertTriangle } from "lucide-react";
 import { createJobAction } from "@/lib/actions/jobs.actions";
 import { useFormStatus } from "react-dom";
 
@@ -88,12 +90,12 @@ export default function JobForm({ user, profile }: JobFormProps) {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6">
-      <div className="flex items-center gap-4 mb-8">
-        <Avatar alt={displayName} size={64} className="h-16 w-16" />
-        <div>
-          <h1 className="text-3xl font-bold">Post a Job</h1>
-          <p className="text-gray-600 mt-1">Posting as {displayName}</p>
+    <div className="max-w-2xl mx-auto p-4 sm:p-6">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-8">
+        <Avatar alt={displayName} size={64} className="h-16 w-16 mx-auto sm:mx-0" />
+        <div className="text-center sm:text-left">
+          <h1 className="text-2xl sm:text-3xl font-bold">Post a Job</h1>
+          <p className="text-muted-foreground mt-1">Posting as {displayName}</p>
         </div>
       </div>
 
@@ -265,9 +267,10 @@ export default function JobForm({ user, profile }: JobFormProps) {
         </div>
 
         {error && (
-          <div className="text-red-600 text-sm bg-red-50 p-3 rounded">
-            {error}
-          </div>
+          <Alert variant="destructive">
+            <AlertTriangle className="h-4 w-4" />
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
         )}
 
         <SubmitButton />

@@ -6,6 +6,8 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { AlertTriangle } from "lucide-react";
 import { loginAction } from "@/lib/actions/auth.actions";
 
 function SubmitButton() {
@@ -78,19 +80,20 @@ export function LoginForm() {
       </div>
 
       {error && (
-        <div className="text-red-600 text-sm bg-red-50 p-3 rounded">
-          {error}
-        </div>
+        <Alert variant="destructive">
+          <AlertTriangle className="h-4 w-4" />
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
       )}
 
       <SubmitButton />
 
       <div className="text-center">
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-muted-foreground">
           Don't have an account?{" "}
           <Link
             href="/signup"
-            className="font-medium text-blue-600 hover:text-blue-500"
+            className="font-medium text-primary hover:text-primary/80 transition-colors"
           >
             Sign up
           </Link>
