@@ -67,11 +67,11 @@ export default function ProfileDropdown({
 
         <DropdownMenuSeparator />
 
-        {profile?.role === "business" && (
+        {(profile?.role === "business" || profile?.role === "admin") && (
           <>
             <DropdownMenuItem asChild>
               <Link href="/dashboard" className="cursor-pointer">
-                Dashboard
+                {profile?.role === "admin" ? "Jobs Dashboard" : "Dashboard"}
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
@@ -79,6 +79,13 @@ export default function ProfileDropdown({
                 Post a Job
               </Link>
             </DropdownMenuItem>
+            {profile?.role === "admin" && (
+              <DropdownMenuItem asChild>
+                <Link href="/admin" className="cursor-pointer">
+                  Admin Panel
+                </Link>
+              </DropdownMenuItem>
+            )}
             <DropdownMenuSeparator />
           </>
         )}

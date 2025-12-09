@@ -21,7 +21,7 @@ export default async function PostJobPage() {
     .eq("id", user.id)
     .single();
 
-  if (!profile || profile.role !== "business") {
+  if (!profile || (profile.role !== "business" && profile.role !== "admin")) {
     redirect("/");
   }
 

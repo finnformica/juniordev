@@ -6,8 +6,8 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import type { TablesInsert } from "@/lib/types/database";
 
-// Helper function to require specific role
-async function requireRole(requiredRole: string) {
+// Helper function to require specific role(s)
+async function requireRole(requiredRoles: string | string[]) {
   const supabase = await createClient();
 
   const {
@@ -28,7 +28,8 @@ async function requireRole(requiredRole: string) {
     return { error: "Profile not found" };
   }
 
-  if (profile.role !== requiredRole) {
+  const allowedRoles = Array.isArray(requiredRoles) ? requiredRoles : [requiredRoles];
+  if (!allowedRoles.includes(profile.role)) {
     return { error: "Unauthorized" };
   }
 
@@ -58,7 +59,7 @@ const createJobSchema = z.object({
 
 export async function createJobAction(formData: FormData) {
   // Check user role
-  const authResult = await requireRole("business");
+  const authResult = await requireRole(["business", "admin"]);
   if ("error" in authResult) {
     return authResult;
   }
@@ -138,27 +139,29 @@ export async function createJobAction(formData: FormData) {
 
 export async function updateJobStatusAction(jobId: string, isActive: boolean) {
   // Check user role
-  const authResult = await requireRole("business");
+  const authResult = await requireRole(["business", "admin"]);
   if ("error" in authResult) {
     return authResult;
   }
 
-  const { user } = authResult;
+  const { user, profile } = authResult;
   const supabase = await createClient();
 
-  // Verify the job belongs to the current user
-  const { data: job, error: fetchError } = await supabase
-    .from("jobs")
-    .select("business_id")
-    .eq("id", jobId)
-    .single();
+  // Verify the job belongs to the current user (unless they're admin)
+  if (profile.role === "business") {
+    const { data: job, error: fetchError } = await supabase
+      .from("jobs")
+      .select("business_id")
+      .eq("id", jobId)
+      .single();
 
-  if (fetchError || !job) {
-    return { error: "Job not found" };
-  }
+    if (fetchError || !job) {
+      return { error: "Job not found" };
+    }
 
-  if (job.business_id !== user.id) {
-    return { error: "Unauthorized - you can only update your own jobs" };
+    if (job.business_id !== user.id) {
+      return { error: "Unauthorized - you can only update your own jobs" };
+    }
   }
 
   // Update the job status
@@ -178,27 +181,29 @@ export async function updateJobStatusAction(jobId: string, isActive: boolean) {
 
 export async function deleteJobAction(jobId: string) {
   // Check user role
-  const authResult = await requireRole("business");
+  const authResult = await requireRole(["business", "admin"]);
   if ("error" in authResult) {
     return authResult;
   }
 
-  const { user } = authResult;
+  const { user, profile } = authResult;
   const supabase = await createClient();
 
-  // Verify the job belongs to the current user
-  const { data: job, error: fetchError } = await supabase
-    .from("jobs")
-    .select("business_id")
-    .eq("id", jobId)
-    .single();
+  // Verify the job belongs to the current user (unless they're admin)
+  if (profile.role === "business") {
+    const { data: job, error: fetchError } = await supabase
+      .from("jobs")
+      .select("business_id")
+      .eq("id", jobId)
+      .single();
 
-  if (fetchError || !job) {
-    return { error: "Job not found" };
-  }
+    if (fetchError || !job) {
+      return { error: "Job not found" };
+    }
 
-  if (job.business_id !== user.id) {
-    return { error: "Unauthorized - you can only delete your own jobs" };
+    if (job.business_id !== user.id) {
+      return { error: "Unauthorized - you can only delete your own jobs" };
+    }
   }
 
   // Delete the job
