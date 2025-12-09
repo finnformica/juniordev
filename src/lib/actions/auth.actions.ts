@@ -57,7 +57,7 @@ export async function signupAction(formData: FormData) {
     email: formData.get("email"),
     password: formData.get("password"),
     role: formData.get("role"),
-    companyName: formData.get("companyName"),
+    companyName: formData.get("companyName") || undefined,
   };
 
   const validatedData = signupSchema.safeParse(rawData);

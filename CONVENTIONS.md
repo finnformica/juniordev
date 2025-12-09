@@ -44,6 +44,9 @@ import type { Database } from "@/lib/types/database";
 - Zod for validation
 - useFormStatus for pending state
 - Progressive enhancement (works without JS)
+- Must preserve user input on validation errors
+- Always use controlled components with state
+- Convert FormData null values to undefined for optional fields
 
 ## Styling
 

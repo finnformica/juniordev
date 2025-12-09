@@ -20,10 +20,25 @@ function SubmitButton() {
 
 export function LoginForm() {
   const [error, setError] = useState<string | null>(null);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
-  async function handleSubmit(formData: FormData) {
+  async function handleSubmit(formDataFromForm: FormData) {
     setError(null);
-    const result = await loginAction(formData);
+
+    // Get values from form and update state
+    const email = formDataFromForm.get("email") as string;
+    const password = formDataFromForm.get("password") as string;
+
+    // Update state to preserve values
+    setFormData({
+      email,
+      password,
+    });
+
+    const result = await loginAction(formDataFromForm);
     if (result?.error) {
       setError(result.error);
     }
@@ -42,6 +57,8 @@ export function LoginForm() {
             required
             className="mt-1"
             placeholder="Enter your email"
+            value={formData.email}
+            onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
           />
         </div>
         <div>
@@ -54,6 +71,8 @@ export function LoginForm() {
             required
             className="mt-1"
             placeholder="Enter your password"
+            value={formData.password}
+            onChange={(e) => setFormData(prev => ({ ...prev, password: e.target.value }))}
           />
         </div>
       </div>

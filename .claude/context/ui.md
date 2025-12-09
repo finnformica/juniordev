@@ -13,6 +13,7 @@
 Install only as needed: `npx shadcn@latest add <component>`
 
 **Likely components needed for MVP:**
+
 - `button` - Submit buttons, navigation
 - `input` - Form inputs
 - `form` - Job posting form
@@ -35,6 +36,7 @@ export default async function Page() {
 
 ```typescript
 "use client";
+import { useState } from "react";
 import { useFormStatus } from "react-dom";
 
 function SubmitButton() {
@@ -43,9 +45,59 @@ function SubmitButton() {
 }
 
 export function Form() {
-  return <form action={serverAction}>...</form>;
+  const [error, setError] = useState<string | null>(null);
+  const [formData, setFormData] = useState({
+    field1: "",
+    field2: "",
+    // ... all form fields
+  });
+
+  async function handleSubmit(formDataFromForm: FormData) {
+    setError(null);
+
+    // Extract and preserve form values
+    const field1 = formDataFromForm.get("field1") as string;
+    const field2 = formDataFromForm.get("field2") as string;
+
+    setFormData({ field1, field2 });
+
+    const result = await serverAction(formDataFromForm);
+    if (result && "error" in result) {
+      setError(result.error || "An error occurred");
+    }
+  }
+
+  return (
+    <form action={handleSubmit}>
+      <input
+        name="field1"
+        value={formData.field1}
+        onChange={(e) =>
+          setFormData((prev) => ({ ...prev, field1: e.target.value }))
+        }
+      />
+
+      {error && (
+        <div className="text-red-600 text-sm bg-red-50 p-3 rounded">
+          {error}
+        </div>
+      )}
+
+      <SubmitButton />
+    </form>
+  );
 }
 ```
+
+## Form Standards
+
+**ALL forms MUST preserve user input on validation errors:**
+
+- Use controlled components with `value` and `onChange`
+- Extract form values before server action call
+- Update component state to preserve values
+- Display errors without clearing form fields
+- Convert `null` FormData values to `undefined` for optional fields
 
 ## Styling Conventions
 

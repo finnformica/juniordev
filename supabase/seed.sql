@@ -29,7 +29,7 @@ INSERT INTO auth.users (
 ('00000000-0000-0000-0000-000000000000', '3c4d5e6f-7a8b-9c0d-1e2f-3a4b5c6d7e8f', 'authenticated', 'authenticated', 'alex.junior@email.com', '$2a$10$H3M.U6q4YJZzrDg5dOGQ8u7DvJJv8u4qA3TjKE4xKJLrKM8TmKKYu', NOW(), NOW(), NOW(), '{"provider":"email","providers":["email"]}', '{"role":"junior","first_name":"Alex","last_name":"Taylor"}', NOW(), NOW(), '', '', '', ''),
 ('00000000-0000-0000-0000-000000000000', '4d5e6f7a-8b9c-0d1e-2f3a-4b5c6d7e8f9a', 'authenticated', 'authenticated', 'jordan.dev@email.com', '$2a$10$H3M.U6q4YJZzrDg5dOGQ8u7DvJJv8u4qA3TjKE4xKJLrKM8TmKKYu', NOW(), NOW(), NOW(), '{"provider":"email","providers":["email"]}', '{"role":"junior","first_name":"Jordan","last_name":"Kim"}', NOW(), NOW(), '', '', '', ''),
 -- Admin user
-('00000000-0000-0000-0000-000000000000', '5e6f7a8b-9c0d-1e2f-3a4b-5c6d7e8f9a0b', 'authenticated', 'authenticated', 'admin@juniorjobs.com', '$2a$10$H3M.U6q4YJZzrDg5dOGQ8u7DvJJv8u4qA3TjKE4xKJLrKM8TmKKYu', NOW(), NOW(), NOW(), '{"provider":"email","providers":["email"]}', '{"role":"admin","first_name":"Admin","last_name":"User"}', NOW(), NOW(), '', '', '', '');
+('00000000-0000-0000-0000-000000000000', '5e6f7a8b-9c0d-1e2f-3a4b-5c6d7e8f9a0b', 'authenticated', 'authenticated', 'admin@admin.com', '$2a$10$H3M.U6q4YJZzrDg5dOGQ8u7DvJJv8u4qA3TjKE4xKJLrKM8TmKKYu', NOW(), NOW(), NOW(), '{"provider":"email","providers":["email"]}', '{"role":"admin","first_name":"Admin","last_name":"User"}', NOW(), NOW(), '', '', '', '');
 
 -- Now insert profiles (these will be created automatically by the trigger, but we'll update them with additional data)
 -- First, let's manually insert profiles since the trigger might not handle all our custom data

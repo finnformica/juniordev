@@ -21,15 +21,35 @@ function SubmitButton() {
 
 export function SignupForm() {
   const [error, setError] = useState<string | null>(null);
-  const [role, setRole] = useState<string>("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    role: "",
+    companyName: "",
+  });
 
-  async function handleSubmit(formData: FormData) {
+  async function handleSubmit(formDataFromForm: FormData) {
     setError(null);
 
-    // Add role to formData since Select component doesn't automatically include it
-    formData.set("role", role);
+    // Get values from form and update state
+    const email = formDataFromForm.get("email") as string;
+    const password = formDataFromForm.get("password") as string;
+    const companyName = formDataFromForm.get("companyName") as string;
 
-    const result = await signupAction(formData);
+    const currentFormData = {
+      email,
+      password,
+      role: formData.role,
+      companyName,
+    };
+
+    // Update state to preserve values
+    setFormData(currentFormData);
+
+    // Add role to formData since Select component doesn't automatically include it
+    formDataFromForm.set("role", formData.role);
+
+    const result = await signupAction(formDataFromForm);
     if (result?.error) {
       setError(result.error);
     }
@@ -48,6 +68,8 @@ export function SignupForm() {
             required
             className="mt-1"
             placeholder="Enter your email"
+            value={formData.email}
+            onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
           />
         </div>
 
@@ -61,12 +83,18 @@ export function SignupForm() {
             required
             className="mt-1"
             placeholder="Create a password (min 6 characters)"
+            value={formData.password}
+            onChange={(e) => setFormData(prev => ({ ...prev, password: e.target.value }))}
           />
         </div>
 
         <div>
           <Label htmlFor="role">I am a...</Label>
-          <Select value={role} onValueChange={setRole} required>
+          <Select
+            value={formData.role}
+            onValueChange={(value) => setFormData(prev => ({ ...prev, role: value }))}
+            required
+          >
             <SelectTrigger className="mt-1">
               <SelectValue placeholder="Select your role" />
             </SelectTrigger>
@@ -77,7 +105,7 @@ export function SignupForm() {
           </Select>
         </div>
 
-        {role === "business" && (
+        {formData.role === "business" && (
           <div>
             <Label htmlFor="companyName">Company Name</Label>
             <Input
@@ -87,6 +115,8 @@ export function SignupForm() {
               required
               className="mt-1"
               placeholder="Enter your company name"
+              value={formData.companyName}
+              onChange={(e) => setFormData(prev => ({ ...prev, companyName: e.target.value }))}
             />
           </div>
         )}

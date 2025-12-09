@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -37,9 +38,53 @@ function getDisplayName(
 
 export default function JobForm({ user, profile }: JobFormProps) {
   const displayName = getDisplayName(profile, user.email);
+  const [error, setError] = useState<string | null>(null);
+  const [formData, setFormData] = useState({
+    title: "",
+    location: "",
+    locationType: "",
+    employmentType: "",
+    experienceLevel: "",
+    compensationType: "",
+    compensationAmount: "",
+    skills: "",
+    applicationDeadline: "",
+    description: "",
+  });
 
-  const handleCreateJob = async (formData: FormData) => {
-    await createJobAction(formData);
+  const handleCreateJob = async (formDataFromForm: FormData) => {
+    setError(null);
+
+    // Get values from form and update state
+    const title = formDataFromForm.get("title") as string;
+    const location = formDataFromForm.get("location") as string;
+    const locationType = formDataFromForm.get("locationType") as string;
+    const employmentType = formDataFromForm.get("employmentType") as string;
+    const experienceLevel = formDataFromForm.get("experienceLevel") as string;
+    const compensationType = formDataFromForm.get("compensationType") as string;
+    const compensationAmount = formDataFromForm.get("compensationAmount") as string;
+    const skills = formDataFromForm.get("skills") as string;
+    const applicationDeadline = formDataFromForm.get("applicationDeadline") as string;
+    const description = formDataFromForm.get("description") as string;
+
+    // Update state to preserve values
+    setFormData({
+      title,
+      location,
+      locationType,
+      employmentType,
+      experienceLevel,
+      compensationType,
+      compensationAmount,
+      skills,
+      applicationDeadline,
+      description,
+    });
+
+    const result = await createJobAction(formDataFromForm);
+    if (result && "error" in result) {
+      setError(result.error || "An error occurred");
+    }
   };
 
   return (
@@ -62,6 +107,8 @@ export default function JobForm({ user, profile }: JobFormProps) {
             type="text"
             placeholder="e.g. Junior Frontend Developer"
             required
+            value={formData.title}
+            onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
           />
         </div>
 
@@ -74,6 +121,8 @@ export default function JobForm({ user, profile }: JobFormProps) {
             type="text"
             placeholder="e.g. Remote, New York, London"
             required
+            value={formData.location}
+            onChange={(e) => setFormData(prev => ({ ...prev, location: e.target.value }))}
           />
         </div>
 
@@ -85,6 +134,8 @@ export default function JobForm({ user, profile }: JobFormProps) {
             name="locationType"
             required
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value={formData.locationType}
+            onChange={(e) => setFormData(prev => ({ ...prev, locationType: e.target.value }))}
           >
             <option value="">Select location type</option>
             <option value="remote">Remote</option>
@@ -101,6 +152,8 @@ export default function JobForm({ user, profile }: JobFormProps) {
             name="employmentType"
             required
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value={formData.employmentType}
+            onChange={(e) => setFormData(prev => ({ ...prev, employmentType: e.target.value }))}
           >
             <option value="">Select employment type</option>
             <option value="full-time">Full-time</option>
@@ -118,6 +171,8 @@ export default function JobForm({ user, profile }: JobFormProps) {
             name="experienceLevel"
             required
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value={formData.experienceLevel}
+            onChange={(e) => setFormData(prev => ({ ...prev, experienceLevel: e.target.value }))}
           >
             <option value="">Select experience level</option>
             <option value="entry">Entry Level</option>
@@ -135,6 +190,8 @@ export default function JobForm({ user, profile }: JobFormProps) {
             name="compensationType"
             required
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value={formData.compensationType}
+            onChange={(e) => setFormData(prev => ({ ...prev, compensationType: e.target.value }))}
           >
             <option value="">Select compensation type</option>
             <option value="unpaid">Unpaid (Experience only)</option>
@@ -154,6 +211,8 @@ export default function JobForm({ user, profile }: JobFormProps) {
             name="compensationAmount"
             type="text"
             placeholder="e.g. $15/hour, $50k/year, $500/month"
+            value={formData.compensationAmount}
+            onChange={(e) => setFormData(prev => ({ ...prev, compensationAmount: e.target.value }))}
           />
         </div>
 
@@ -165,6 +224,8 @@ export default function JobForm({ user, profile }: JobFormProps) {
             name="skills"
             type="text"
             placeholder="e.g. React, TypeScript, CSS, Git (comma-separated)"
+            value={formData.skills}
+            onChange={(e) => setFormData(prev => ({ ...prev, skills: e.target.value }))}
           />
           <p className="text-sm text-gray-600">
             Enter skills separated by commas
@@ -180,6 +241,8 @@ export default function JobForm({ user, profile }: JobFormProps) {
             id="applicationDeadline"
             name="applicationDeadline"
             type="date"
+            value={formData.applicationDeadline}
+            onChange={(e) => setFormData(prev => ({ ...prev, applicationDeadline: e.target.value }))}
           />
         </div>
 
@@ -192,12 +255,20 @@ export default function JobForm({ user, profile }: JobFormProps) {
             placeholder="Describe the role, responsibilities, and what the junior developer will learn..."
             rows={8}
             required
+            value={formData.description}
+            onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
           />
           <p className="text-sm text-gray-600">
             Include what the junior developer will learn, their
             responsibilities, and any requirements.
           </p>
         </div>
+
+        {error && (
+          <div className="text-red-600 text-sm bg-red-50 p-3 rounded">
+            {error}
+          </div>
+        )}
 
         <SubmitButton />
       </form>
